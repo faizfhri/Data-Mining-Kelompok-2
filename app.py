@@ -1,3 +1,10 @@
+'''
+    Kelompok 2:
+    140810220002 - Muhammad Faiz Fahri
+    140810220003 - Dylan Amadeus
+    140810220007 - Muhammad Zhafran Shiddiq
+'''
+
 import streamlit as st
 import numpy as np
 import cv2
@@ -298,7 +305,7 @@ if uploaded_image:
     display_side_by_side(test_image, clustered_image_no_training, "Original Test Image", f"Clustered Test Image without Training Data ({num_clusters} clusters)")
 
     # Silhouette score untuk clustering tanpa data latih
-    silhouette_no_training = calculate_silhouette_score(test_image.reshape(-1, 3).astype(np.float32), labels_no_training)
+    silhouette_no_training = calculate_silhouette_score(test_image.reshape(-1, 3).astype(np.float32), labels_no_training, sample_size=30000)
     st.write(f"Silhouette Coefficient (without training data): {silhouette_no_training if silhouette_no_training is not None else 'Not applicable'}")
 
     # Jika data latih tersedia, lakukan clustering dengan data latih
@@ -319,7 +326,7 @@ if uploaded_image:
         display_side_by_side(test_image, clustered_image_with_training, "Original Test Image", f"Clustered Test Image with Training Data ({num_clusters} clusters)")
 
         # Silhouette score untuk clustering dengan data latih
-        silhouette_with_training = calculate_silhouette_score(test_image.reshape(-1, 3).astype(np.float32), labels_with_training)
+        silhouette_with_training = calculate_silhouette_score(test_image.reshape(-1, 3).astype(np.float32), labels_with_training, sample_size=30000)
         st.write(f"Silhouette Coefficient (with training data): {silhouette_with_training if silhouette_with_training is not None else 'Not applicable'}")
 
         analyze_clustering_results(silhouette_no_training, silhouette_with_training)
